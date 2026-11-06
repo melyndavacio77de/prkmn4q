@@ -1,0 +1,16 @@
+name: 🎯 Usopp – Penembak Jitu
+
+on:
+  workflow_call:
+
+jobs:
+  usopp-shot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🎯 Usopp menembakkan sinyal mulai
+        run: |
+          echo "════════════════════════════════════════"
+          echo "🎯 Usopp: 'Aku adalah Usopp sang penembak jitu!'"
+          echo "🏴‍☠️ Kru Topi Jerami bersiap berlayar!"
+          echo "🚀 BERANGKAT"
+          echo "════════════════════════════════════════"
