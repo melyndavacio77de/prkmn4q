@@ -1,29 +1,33 @@
-name: ♻️ one
+name: 🩺 Chopper – Dokter Kru
 
+# =============================================
+# 🩺 CHOpper: Menghidupkan kembali Nakhoda (Nami)
+# =============================================
 on:
   workflow_dispatch:
     inputs:
       cycle:
-        description: 'Nilai cycle awal'
+        description: 'Bounty cycle (angka awal)'
         required: false
         default: '0'
   workflow_call:
     inputs:
       cycle:
         required: false
-        type: string          # 👈 ubah dari number ke string
+        type: string
         default: '0'
 
 permissions:
   actions: write
 
 jobs:
-  panggil-bluebob:
+  chopper-rumble:
     runs-on: ubuntu-latest
     steps:
-      - name: Tentukan nilai cycle
+      - name: 🩺 Chopper minum Rumble Ball
         id: val
         run: |
+          echo "🩺 Chopper: 'Aku akan menyembuhkan kru ini!'"
           if [ -n "${{ inputs.cycle }}" ]; then
             CYCLE="${{ inputs.cycle }}"
           elif [ -n "${{ github.event.inputs.cycle }}" ]; then
@@ -32,15 +36,17 @@ jobs:
             CYCLE=0
           fi
           echo "cycle=$CYCLE" >> $GITHUB_OUTPUT
+          echo "🩺 Cycle saat ini: $CYCLE"
 
-      - name: Panggil bluebob dengan cycle
+      - name: 🩺 Panggil Nami (navigator kru)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "🚀 Memanggil bluebob dengan cycle=${{ steps.val.outputs.cycle }}"
+          echo "🩺 Chopper: 'Nami, kita butuh rute baru!'"
+          echo "🚀 Memanggil nami.yml dengan cycle=${{ steps.val.outputs.cycle }}"
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/bluebob.yml/dispatches \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/nami.yml/dispatches \
             -d "{\"ref\":\"main\",\"inputs\":{\"cycle\":\"${{ steps.val.outputs.cycle }}\"}}"
-          echo "✅ Bluebob telah dipicu dengan cycle=${{ steps.val.outputs.cycle }}"
+          echo "✅ Nami telah dipanggil. Grand Line dimulai!"
