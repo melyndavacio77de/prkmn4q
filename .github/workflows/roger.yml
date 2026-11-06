@@ -1,0 +1,51 @@
+name: 👑 Gol D. Roger – Raja Bajak Laut
+
+# =============================================
+# 👑 ROGER: Sang Raja Bajak Laut memulai era baru
+# =============================================
+on:
+  workflow_dispatch:
+    inputs:
+      cycle:
+        description: 'Cycle awal (bounty pertama)'
+        required: false
+        default: '0'
+
+permissions:
+  actions: write
+
+jobs:
+  roger-legacy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 👑 Roger mengucapkan kata-kata terakhirnya
+        id: val
+        run: |
+          echo "════════════════════════════════════════════════════"
+          echo "👑 Gol D. Roger: 'Kau ingin hartaku? Aku telah"
+          echo "   meninggalkannya di sana. Cari! One Piece!'"
+          echo "════════════════════════════════════════════════════"
+          CYCLE="${{ github.event.inputs.cycle || '0' }}"
+          echo "cycle=$CYCLE" >> $GITHUB_OUTPUT
+          echo "👑 Cycle awal: $CYCLE"
+
+      - name: 🩺 Bangkitkan Chopper untuk memulai era baru
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "👑 Roger: 'Era bajak laut dimulai!'"
+          echo "🩺 Memanggil chopper.yml dengan cycle=${{ steps.val.outputs.cycle }}"
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/chopper.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"cycle\":\"${{ steps.val.outputs.cycle }}\"}}"
+          echo "✅ Chopper telah dipanggil. One Piece dimulai!"
+
+      - name: 📜 Pesan terakhir
+        run: |
+          echo "════════════════════════════════════════════════════"
+          echo "👑 'Suatu hari nanti, seseorang akan datang untuk"
+          echo "   menemukan One Piece. Itu adalah takdir!'"
+          echo "🌊 Grand Line menanti para kru Topi Jerami..."
+          echo "════════════════════════════════════════════════════"
