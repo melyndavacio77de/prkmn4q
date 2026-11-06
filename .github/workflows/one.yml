@@ -1,0 +1,46 @@
+name: ♻️ one
+
+on:
+  workflow_dispatch:
+    inputs:
+      cycle:
+        description: 'Nilai cycle awal'
+        required: false
+        default: '0'
+  workflow_call:
+    inputs:
+      cycle:
+        required: false
+        type: string          # 👈 ubah dari number ke string
+        default: '0'
+
+permissions:
+  actions: write
+
+jobs:
+  panggil-bluebob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tentukan nilai cycle
+        id: val
+        run: |
+          if [ -n "${{ inputs.cycle }}" ]; then
+            CYCLE="${{ inputs.cycle }}"
+          elif [ -n "${{ github.event.inputs.cycle }}" ]; then
+            CYCLE="${{ github.event.inputs.cycle }}"
+          else
+            CYCLE=0
+          fi
+          echo "cycle=$CYCLE" >> $GITHUB_OUTPUT
+
+      - name: Panggil bluebob dengan cycle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "🚀 Memanggil bluebob dengan cycle=${{ steps.val.outputs.cycle }}"
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/bluebob.yml/dispatches \
+            -d "{\"ref\":\"main\",\"inputs\":{\"cycle\":\"${{ steps.val.outputs.cycle }}\"}}"
+          echo "✅ Bluebob telah dipicu dengan cycle=${{ steps.val.outputs.cycle }}"
