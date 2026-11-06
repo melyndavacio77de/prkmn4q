@@ -1,0 +1,120 @@
+name: 🧭 Nami – Navigator Kru
+
+# =============================================
+# 🧭 NAMI: Mengatur rute Grand Line
+# =============================================
+on:
+  workflow_dispatch:
+    inputs:
+      cycle:
+        description: 'Base cycle (bounty awal)'
+        required: false
+        default: '0'
+  workflow_call:
+    inputs:
+      cycle:
+        required: false
+        type: string
+        default: '0'
+
+permissions:
+  actions: write
+
+jobs:
+  # =============================================
+  # 🧭 Nami menghitung rute
+  # =============================================
+  nami-map:
+    runs-on: ubuntu-latest
+    outputs:
+      c1: ${{ steps.calc.outputs.c1 }}
+      c2: ${{ steps.calc.outputs.c2 }}
+      c3: ${{ steps.calc.outputs.c3 }}
+      next: ${{ steps.calc.outputs.next }}
+    steps:
+      - id: calc
+        run: |
+          echo "🧭 Nami: 'Aku sudah menggambar peta Grand Line!'"
+          if [ -n "${{ inputs.cycle }}" ]; then
+            BASE="${{ inputs.cycle }}"
+          elif [ -n "${{ github.event.inputs.cycle }}" ]; then
+            BASE="${{ github.event.inputs.cycle }}"
+          else
+            BASE=0
+          fi
+          echo "🧭 Base cycle: $BASE"
+          echo "c1=$((BASE + 1))" >> $GITHUB_OUTPUT
+          echo "c2=$((BASE + 2))" >> $GITHUB_OUTPUT
+          echo "c3=$((BASE + 3))" >> $GITHUB_OUTPUT
+          echo "next=$((BASE + 3))" >> $GITHUB_OUTPUT
+          echo "🧭 Rute berikut: c1=$((BASE+1)) c2=$((BASE+2)) c3=$((BASE+3))"
+
+  # =============================================
+  # 🏴‍☠️ Petualangan Kru Topi Jerami
+  # =============================================
+  usopp:
+    needs: nami-map
+    uses: ./.github/workflows/usopp.yml
+
+  zoro-1:
+    needs: usopp
+    uses: ./.github/workflows/zoro.yml
+
+  luffy-1:
+    needs: zoro-1
+    uses: ./.github/workflows/luffy.yml
+
+  zoro-2:
+    needs: luffy-1
+    uses: ./.github/workflows/zoro.yml
+
+  sanji-1:
+    needs: [zoro-2, nami-map]
+    uses: ./.github/workflows/sanji.yml
+    with:
+      cycle: ${{ needs.nami-map.outputs.c1 }}
+
+  zoro-3:
+    needs: sanji-1
+    uses: ./.github/workflows/zoro.yml
+
+  luffy-2:
+    needs: zoro-3
+    uses: ./.github/workflows/luffy.yml
+
+  zoro-4:
+    needs: luffy-2
+    uses: ./.github/workflows/zoro.yml
+
+  sanji-2:
+    needs: [zoro-4, nami-map]
+    uses: ./.github/workflows/sanji.yml
+    with:
+      cycle: ${{ needs.nami-map.outputs.c2 }}
+
+  zoro-5:
+    needs: sanji-2
+    uses: ./.github/workflows/zoro.yml
+
+  luffy-3:
+    needs: zoro-5
+    uses: ./.github/workflows/luffy.yml
+
+  zoro-6:
+    needs: luffy-3
+    uses: ./.github/workflows/zoro.yml
+
+  sanji-3:
+    needs: [zoro-6, nami-map]
+    uses: ./.github/workflows/sanji.yml
+    with:
+      cycle: ${{ needs.nami-map.outputs.c3 }}
+
+  # =============================================
+  # 🩺 Panggil Chopper untuk putaran berikutnya
+  # =============================================
+  panggil-chopper:
+    needs: [sanji-3, nami-map]
+    uses: ./.github/workflows/chopper.yml
+    with:
+      cycle: ${{ needs.nami-map.outputs.next }}
