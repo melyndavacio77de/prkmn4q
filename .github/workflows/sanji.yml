@@ -15,26 +15,26 @@ jobs:
       max-parallel: 20
       matrix:
         crew:
-          - sanji-01
-          - sanji-02
-          - sanji-03
-          - sanji-04
-          - sanji-05
-          - sanji-06
-          - sanji-07
-          - sanji-08
-          - sanji-09
-          - sanji-10
-          - sanji-11
-          - sanji-12
-          - sanji-13
-          - sanji-14
-          - sanji-15
-          - sanji-16
-          - sanji-17
-          - sanji-18
-          - sanji-19
-          - sanji-20
+          - sa46nji-ad01idghelliosan-ayonser1112a1
+          - sanetji-da02idghelliosan-ayonser1112a1
+          - saetnji-da03idghelliosan-ayonser1112a1
+          - sanetji-ad04idghelliosan-ayonser1112a1
+          - syranji-sfg05idghelliosan-ayonser1112a1
+          - sangfji-fa06idghelliosan-ayonser1112a1
+          - sartnji-fa07idghelliosan-ayonser1112a1
+          - sartnji-af08idghelliosan-ayonser1112a1
+          - sadgnji-fa09idghelliosan-ayonser1112a1
+          - seranji-f10idghelliosan-ayonser1112a1
+          - sasgnji-fa11idghelliosan-ayonser1112a1
+          - sayunji-fa12idghelliosan-ayonser1112a1
+          - sabcnji-af13idghelliosan-ayonser1112a1
+          - saocnji-f14idghelliosan-ayonser1112a1
+          - savcnji-af15idghelliosan-ayonser1112a1
+          - sdganji-f16idghelliosan-ayonser1112a1
+          - ssfanji-af17idghelliosan-ayonser1112a1
+          - sbganji-af18idghelliosan-ayonser1112a1
+          - snhanji-af19idghelliosan-ayonser1112a1
+          - smkanji-wr20idghelliosan-ayonser1112a1
     name: ${{ matrix.crew }}
     runs-on: ubuntu-latest
     timeout-minutes: 360
