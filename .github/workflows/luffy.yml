@@ -32,7 +32,7 @@ jobs:
           - katakuri
     name: ${{ matrix.crew }}
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 360
     steps:
       - name: 🏴‍☠️ Kru Topi Jerami beraksi
         run: |
