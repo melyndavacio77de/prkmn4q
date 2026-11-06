@@ -10,34 +10,34 @@ on:
 
 jobs:
   sanji-kick:
-    name: ${{ matrix.name }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 360
     strategy:
       fail-fast: false
       max-parallel: 20
       matrix:
-        name:
-          - name: idghelliosan-ayonser1112a1
-          - name: wgjhelliosan-byonser1112b1
-          - name: nbghelliosan-cyonser1112c1
-          - name: udghelliosan-dyonser1112d1
-          - name: ybfhelliosan-eyonser1112e1
-          - name: dgbhelliosan-fyonser1112f1
-          - name: jdghelliosan-gyonser1112g1
-          - name: vfshelliosan-hyonser1112h1
-          - name: tfsfhelliosan-iyonser1112i1
-          - name: sfsfhelliosan-jyonser1112j1
-          - name: bfgshelilop-kyonserer1112k1
-          - name: bdvshelilop-lyonserer1112l1
-          - name: sfsfhelilop-myonserer1112m1
-          - name: cbnfhelilop-nyonserer1112n1
-          - name: dgsdhelilop-oyonserer1112o1
-          - name: sffshelilop-pyonserer1112p1
-          - name: sfswhelilop-qyonserer1112q1
-          - name: wewyhelilop-ryonserer1112r1
-          - name: ngdghelilop-syonserer1112s1
-          - name: jghfhelilop-tyonserer1112t1
+        crew:
+          - sanji-01
+          - sanji-02
+          - sanji-03
+          - sanji-04
+          - sanji-05
+          - sanji-06
+          - sanji-07
+          - sanji-08
+          - sanji-09
+          - sanji-10
+          - sanji-11
+          - sanji-12
+          - sanji-13
+          - sanji-14
+          - sanji-15
+          - sanji-16
+          - sanji-17
+          - sanji-18
+          - sanji-19
+          - sanji-20
+    name: ${{ matrix.crew }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
     steps:
       - name: 🍳 Sanji menendang dengan Diable Jambe
         run: |
