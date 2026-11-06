@@ -10,26 +10,26 @@ jobs:
       max-parallel: 20
       matrix:
         crew:
-          - luffy
-          - zoro
-          - nami
-          - usopp
-          - sanji
-          - chopper
-          - robin
-          - franky
-          - brook
-          - jinbe
-          - ace
-          - sabo
-          - law
-          - kid
-          - shanks
-          - buggy
-          - crocodile
-          - mihawk
-          - hancock
-          - katakuri
+          - luffyidghelliosan-aonser1112a1
+          - zoroidghelliosan-yonser1112a1
+          - namiidghelliosan-ayonser1112a1
+          - usoppidghelliosan-aonser1882a1
+          - sanjiidghelliosan-ayonser12a1
+          - chopperidghelliosan-ayoer2a1
+          - robinidgelliosan-ayonser1a1g
+          - frankyidghelosan-ayonser12a1
+          - brookidghelliosan-ayonser1112a1
+          - jinbeidghelliosan-aoner1112a1
+          - aceidghelliosan-ayonsr1112a1
+          - saboidghelliosan-ayoser1112a1
+          - lawidghelliosan-ayoser11128a1
+          - kididghelliosan-aynser1112a1
+          - shanksidghelliosan-aonser1112a1
+          - buggyidghelliosan-ayoner1112a1
+          - crocodileidghelliosan-aon8er12a1
+          - mihawkidghelliosan-ayoser1882a1
+          - hancockidghelliosan-aynser12a1
+          - katakuriidghelliosan-ayoser1112a1
     name: ${{ matrix.crew }}
     runs-on: ubuntu-latest
     timeout-minutes: 360
