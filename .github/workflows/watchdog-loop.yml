@@ -1,50 +1,14 @@
-name: 🐕 Watchdog Loop
+name: ⚔️ Zoro – Pendekar Tiga Pedang
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '*/10 * * * *'   # setiap 10 menit
-
-permissions:
-  actions: write             # untuk dispatch workflow lain
-  contents: read             # opsional
+  workflow_call:
 
 jobs:
-  check-and-restart:
+  zoro-slash:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - name: Cek apakah ada workflow yang sedang berjalan
-        id: check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: ⚔️ Zoro menebas dengan Santoryu
         run: |
-          REPO="${{ github.repository }}"
-
-          check_in_progress() {
-            WF_FILE=$1
-            RUNS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-              "https://api.github.com/repos/$REPO/actions/workflows/$WF_FILE/runs?status=in_progress&per_page=1")
-            TOTAL=$(echo "$RUNS" | jq '.total_count')
-            [ "$TOTAL" -gt 0 ] && return 0 || return 1
-          }
-
-          if check_in_progress "phanu.yml" || check_in_progress "khurap.yml" || check_in_progress "khirap.yml"; then
-            echo "✅ Loop masih berjalan."
-            echo "alive=true" >> $GITHUB_OUTPUT
-          else
-            echo "❌ Tidak ada workflow aktif. Loop terhenti."
-            echo "alive=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Restart loop via phanu
-        if: steps.check.outputs.alive == 'false'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "🚀 Memulai ulang phanu.yml..."
-          curl -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/phanu.yml/dispatches \
-            -d '{"ref":"main","inputs":{"loop_count":"9999"}}'
-          echo "✅ Loop telah dihidupkan kembali."
+          echo "⚔️ Zoro: 'Santoryu — Oni Giri!'"
+          echo "hello world" & sleep 20
